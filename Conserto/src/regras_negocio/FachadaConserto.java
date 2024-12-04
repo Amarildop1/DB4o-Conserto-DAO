@@ -1,7 +1,7 @@
 package regras_negocio;
 /**
  * IFPB - SI
- * Disciplina: Persistencia de Objetos
+ * Disciplina: Persistência de Objetos
  */
 
 import java.time.LocalDate;
@@ -49,12 +49,12 @@ public class FachadaConserto {
 		Carro c = daocarro.read(placa);
 		if (c != null) {
 			DAO.rollback();
-			throw new Exception("Criar Carro - carro com placa " + placa + " já existe");
+			throw new Exception("Problema ao tentar Criar Carro. Placa " + placa + " já existe");
 		}
 		
 		if (!cpf.matches("\\d{11}")) {
 			DAO.rollback();
-			throw new Exception("Criar carro - o cpf deve ser numérico e ter exatamente 11 dígitos");
+			throw new Exception("Problema ao tentar Criar Carro. O CPF deve ser numérico e ter exatamente 11 dígitos");
 		}
 		
 		c = new Carro(placa, cpf, proprietario);
@@ -77,6 +77,12 @@ public class FachadaConserto {
 
 
 	//altera o cpf e nome do proprietário
+	/**
+	 * Método alterarCarro(String placa, String cpf, String proprietario): Altera o CPF e o Proprietário.
+	 * 
+	 * @param placa, cpf, proprietario
+	 * 
+	 * */
 	public static void alterarCarro(String placa, String cpf, String proprietario) throws Exception {
 		DAO.begin();
 		
@@ -103,6 +109,13 @@ public class FachadaConserto {
 	}
 
 	//carro
+	/**
+	 * 
+	 * Método alterarPlaca: Altera para placa nova após pesquisar pela placa atual.
+	 * 
+	 * @param placa, novaplaca
+	 * 
+	 * */
 	public static void alterarPlaca(String placa, String novaplaca) throws Exception {
 		DAO.begin();
 		

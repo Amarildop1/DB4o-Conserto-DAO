@@ -1,7 +1,7 @@
 package appconsole;
 /**
  * IFPB - SI
- * Disciplina: Persistencia de Objetos
+ * Disciplina: Persistência de Objetos
  */
 
 import modelo.Carro;
