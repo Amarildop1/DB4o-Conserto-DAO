@@ -1,7 +1,7 @@
 package daodb4o;
 /**
  * IFPB - SI
- * Disciplina: Persistencia de Objetos
+ * Disciplina: Persistência de Objetos
  */
 
 import com.db4o.Db4oEmbedded;

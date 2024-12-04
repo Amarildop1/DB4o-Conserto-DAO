@@ -1,7 +1,7 @@
 package modelo;
 /**
  * IFPB - SI
- * Disciplina: Persistencia de Objetos
+ * Disciplina: Persistência de Objetos
  */
 
 public class Defeito {
@@ -43,5 +43,5 @@ public class Defeito {
 		this.preco = preco;
 	}
 
-}//Fim class Defeito
+} // Fim class Defeito
 

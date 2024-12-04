@@ -1,7 +1,7 @@
 package modelo;
 /**
  * IFPB - SI
- * Disciplina: Persistencia de Objetos
+ * Disciplina: Persistência de Objetos
  */
 
 import java.util.ArrayList;
@@ -89,6 +89,6 @@ public class Conserto {
 	public void setPrecoFinal(double precoFinal) {
 		this.precoFinal = precoFinal;
 	}
-	
-}//Fim class Conserto
+
+} // Fim class Conserto
 

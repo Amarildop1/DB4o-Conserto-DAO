@@ -20,7 +20,7 @@ public class Consultar {
 			System.out.println("\n.......... CONSULTAS ..........");
 			
 			System.out.println("\nCarros Localizados: ");
-	        //System.out.println(FachadaConserto.localizarCarro("AZZ-9999")); SE PESQUISAR PRIMEIRO O INEXISTENTE NÃO CONTINUA OS DE BAIXO
+	        //System.out.println(FachadaConserto.localizarCarro("AZZ-9999")); // SE PESQUISAR PRIMEIRO O INEXISTENTE NÃO CONTINUA OS DE BAIXO
 	        System.out.println(FachadaConserto.localizarCarro("BBB-2222"));
 	        System.out.println(FachadaConserto.localizarCarro("EEE-5555"));
 			System.out.println(FachadaConserto.localizarCarro("CCC-3333"));
@@ -32,11 +32,11 @@ public class Consultar {
 
 
 	        System.out.println("\nConsertos Localizados: ");
-	        //System.out.println(FachadaConserto.localizarConserto(7)); SE PESQUISAR PRIMEIRO O INEXISTENTE NÃO CONTINUA OS DE BAIXO
+	        //System.out.println(FachadaConserto.localizarConserto(7)); // SE PESQUISAR PRIMEIRO O INEXISTENTE NÃO CONTINUA OS DE BAIXO
 	        System.out.println(FachadaConserto.localizarConserto(3));
 	        System.out.println(FachadaConserto.localizarConserto(2));
-	        
-	        
+
+
 	        System.out.println("\nConsertos na data: 06/06/2024");        
 	        List<Conserto> consertosNaData = FachadaConserto.consultarDataConserto("06/06/2024");
 	        for (Conserto consertos : consertosNaData) {
@@ -57,7 +57,7 @@ public class Consultar {
 	            System.out.println();
 	        }
 
-	        
+
 	        System.out.println("\n\nCarros com mais de 2 Consertos:");
 	        List<Carro> carrosComMaisQueNConsertos = FachadaConserto.consultarCarrosComMaisQueNConserto(2);
 	        for (Carro carro : carrosComMaisQueNConsertos) {
@@ -67,20 +67,48 @@ public class Consultar {
 	            System.out.println();
 	        }
 
-
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 
 
+		// Tentando com inexistentes e(ou) errados.
+		try {
+			System.out.println("\nTentando buscar carro informando placas erradas: ");
+	        System.out.println(FachadaConserto.localizarCarro("BBB-222"));
+	        //System.out.println(FachadaConserto.localizarCarro("EE-5555"));
+			//System.out.println(FachadaConserto.localizarCarro("CC-333"));
+		}catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+
+		try {
+	        System.out.println("\nTentando buscar Defeitos informando nomes que não estão cadastrados: ");
+	        System.out.println(FachadaConserto.localizarDefeito("Revisão Suspensão"));
+	        //System.out.println(FachadaConserto.localizarDefeito("Troca de Pastilha de FreioSSS"));
+		}catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+
+	    try {
+	        System.out.println("\nTentando buscar Consertos que não existem: ");
+	        System.out.println(FachadaConserto.localizarConserto(345));
+		}catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+
+
+
 		FachadaConserto.finalizar();
 		System.out.println("\n.......... FIM DAS CONSULTAS ..........");
-	}
+
+	} // Fim de Consultar()
 
 
 	public static void main(String[] args) {
 		new Consultar();
 	}
 
-}//Fim class Consultar
+
+} // Fim class Consultar
 

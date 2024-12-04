@@ -1,7 +1,7 @@
 package modelo;
 /**
  * IFPB - SI
- * Disciplina: Persistencia de Objetos
+ * Disciplina: Persistência de Objetos
  */
 
 import java.util.ArrayList;
@@ -9,6 +9,7 @@ import java.util.List;
 
 /**
  * Classe Carro 
+ * 
  * 
  * */
 public class Carro {
@@ -91,7 +92,7 @@ public class Carro {
 				return c;
 		return null;
 	}
-	
-	
-}//Fim da class Carro
+
+
+} // Fim da class Carro
 
