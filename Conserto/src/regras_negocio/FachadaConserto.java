@@ -49,12 +49,18 @@ public class FachadaConserto {
 		Carro c = daocarro.read(placa);
 		if (c != null) {
 			DAO.rollback();
-			throw new Exception("Problema ao tentar Criar Carro. Placa " + placa + " já existe");
+			throw new Exception("Problema ao tentar Criar Carro. Placa " + placa + " já existe.");
 		}
 		
+		String regex = "^[A-Z]{3}-\\d{4}$";
+		if (!placa.matches(regex)) {
+			DAO.rollback();
+			throw new Exception("Problema ao tentar Criar Carro. Placa " + placa + " fora do padrão permitido.");
+		}
+
 		if (!cpf.matches("\\d{11}")) {
 			DAO.rollback();
-			throw new Exception("Problema ao tentar Criar Carro. O CPF deve ser numérico e ter exatamente 11 dígitos");
+			throw new Exception("Problema ao tentar Criar Carro. O CPF deve ser numérico e ter exatamente 11 dígitos.");
 		}
 		
 		c = new Carro(placa, cpf, proprietario);
@@ -437,7 +443,7 @@ public class FachadaConserto {
 		Defeito d = daodefeito.read(nome);
 		if (d == null) {
 			DAO.rollback();
-			throw new Exception("Excluir defeito - defeito inexistente:" + nome);
+			throw new Exception("Excluir defeito - defeito inexistente: " + nome);
 		}
 
 		//remove a associação do defeito aos consertos
@@ -476,7 +482,7 @@ public class FachadaConserto {
 	 * CONSULTAS IMPLEMENTADAS NOS DAO
 	 * 
 	 **********************************************************/
-/* Se não quisermos utilizar o outro método lá em cima que retorna uma unidade específica
+
 	public static List<Carro> consultarCarros(String caracteres) {
 		List<Carro> result;
 		if (caracteres.isEmpty())
@@ -485,17 +491,15 @@ public class FachadaConserto {
 			result = daocarro.readAll(caracteres);
 		return result;
 	}
-*/
 
-/* Se não quisermos utilizar o outro método lá em cima que retorna uma unidade específica
+
 	public static List<Conserto> consultarConsertos(int digitos) {
 		List<Conserto> result;
 		result = daoconserto.readAll(digitos);
 		return result;
 	}
-*/
 
-/* Se não quisermos utilizar o outro método lá em cima que retorna uma unidade específica
+
 	public static List<Defeito> consultarDefeito(String caracteres) {
 		List<Defeito> result;
 		if (caracteres.isEmpty())
@@ -504,7 +508,7 @@ public class FachadaConserto {
 			result = daodefeito.readAll(caracteres);
 		return result;
 	}
-*/
+
 	public static List<Conserto> consultarDataConserto(String data) {
 		List<Conserto> result;
 		result = daoconserto.readByData(data);

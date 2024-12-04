@@ -15,10 +15,10 @@ public class Alterar {		//AS EXCEÇÕES AINDA ESTÃO GENÉRICAS. | Os prints estão g
 
 		try {
 			FachadaConserto.alterarNomeDefeito("nomeAntigo","novoNome");
-			System.out.println("alterado nome de defeito");
+			System.out.println("Alterado nome de defeito!");
 		}
 		catch (Exception e) {
-			System.out.println(e.getMessage());
+			System.err.println(e.getMessage());
 		}
 		
 		try {
@@ -26,7 +26,7 @@ public class Alterar {		//AS EXCEÇÕES AINDA ESTÃO GENÉRICAS. | Os prints estão g
 			System.out.println("Dono do veículo BBB-2222 alterado!");
 		}
 		catch (Exception e) {
-			System.out.println(e.getMessage());
+			System.err.println(e.getMessage());
 		}
 		
 		try {
@@ -34,7 +34,7 @@ public class Alterar {		//AS EXCEÇÕES AINDA ESTÃO GENÉRICAS. | Os prints estão g
 			System.out.println("Placa do veículo EEE-5555 alterado para ZZZ-1010!");
 		}
 		catch (Exception e) {
-			System.out.println(e.getMessage());
+			System.err.println(e.getMessage());
 		}
 		
 		try {
@@ -42,7 +42,7 @@ public class Alterar {		//AS EXCEÇÕES AINDA ESTÃO GENÉRICAS. | Os prints estão g
 			System.out.println("Data do conserto 9 era 06/06/2024 e foi alterada para 07/07/2024");
 		}
 		catch (Exception e) {
-			System.out.println(e.getMessage());
+			System.err.println(e.getMessage());
 		}
 		
 		try {
@@ -50,7 +50,7 @@ public class Alterar {		//AS EXCEÇÕES AINDA ESTÃO GENÉRICAS. | Os prints estão g
 			System.out.println("Data do conserto 9 era 07/07/2024 e foi alterada para 08/08/2024");
 		}
 		catch (Exception e) {
-			System.out.println(e.getMessage());
+			System.err.println(e.getMessage());
 		}
 		
 		try {
@@ -58,7 +58,7 @@ public class Alterar {		//AS EXCEÇÕES AINDA ESTÃO GENÉRICAS. | Os prints estão g
 			System.out.println("Alterado de Problema na Embreagem para Problema na Elética!");
 		}
 		catch (Exception e) {
-			System.out.println(e.getMessage());
+			System.err.println(e.getMessage());
 		}
 		
 		try {
@@ -66,13 +66,14 @@ public class Alterar {		//AS EXCEÇÕES AINDA ESTÃO GENÉRICAS. | Os prints estão g
 			System.out.println("Preço de Problema na Elétrica atualizado para 700,00");
 		}
 		catch (Exception e) {
-			System.out.println(e.getMessage());
+			System.err.println(e.getMessage());
 		}
 
 
 		FachadaConserto.finalizar();
 		System.out.println("\n.......... FIM ALTERAR ..........");
-	}
+
+	} // Fim de Alterar()
 
 
 
@@ -80,5 +81,6 @@ public class Alterar {		//AS EXCEÇÕES AINDA ESTÃO GENÉRICAS. | Os prints estão g
 		new Alterar();
 	}
 
-}//Fim class Alterar
+
+} // Fim class Alterar
 
