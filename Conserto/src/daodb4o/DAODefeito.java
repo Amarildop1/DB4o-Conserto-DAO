@@ -47,5 +47,5 @@ public class DAODefeito  extends DAO<Defeito>{
 		return q.execute();
 	}
 	
-}//Fim da class DAODefeito
+} // Fim class DAODefeito
 

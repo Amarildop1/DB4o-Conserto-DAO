@@ -53,7 +53,7 @@ public class DAOCarro  extends DAO<Carro>{
 			return null;
 		else
 			//return resultados.getFirst();
-			return resultados.get(0); //CORREÇÃO DO ERRO DA LINHA ACIMA
+			return resultados.get(0); //Correção do erro da linha acima
 	}
 	
 	public List<Carro> readByDefeito(String defeito) {
@@ -69,7 +69,7 @@ public class DAOCarro  extends DAO<Carro>{
 		q.constrain(new Filtro(n));
 		return q.execute(); 
 	}
-}//Fim class DAOCarro
+} // Fim class DAOCarro
 
 
 /*-------------------------------------------------*/

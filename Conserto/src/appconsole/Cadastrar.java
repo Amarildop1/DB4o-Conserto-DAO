@@ -35,7 +35,7 @@ public class Cadastrar {
             //System.out.println("\nLista de carros após cadastrar os defeitos:");
             //exibirConsertosDeCadaCarro();
 
-        } catch (Exception e) {
+        }catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -43,14 +43,17 @@ public class Cadastrar {
 
 
     private static void cadastrarCarros() throws Exception {
-
-        FachadaConserto.criarCarro("AAA-1111", "12345678901", "João da Silva");
-        FachadaConserto.criarCarro("BBB-2222", "98765432100", "Maria Oliveira");
-        FachadaConserto.criarCarro("CCC-3333", "12312312312", "Carlos Souza");
-        FachadaConserto.criarCarro("DDD-4444", "32132132132", "Ana Costa");
-        FachadaConserto.criarCarro("EEE-5555", "55555555555", "Lucas Pereira");
-        
-        FachadaConserto.criarCarro("ZZZ-0000", "00000000000", "Carro para ser deletado");
+    	try {
+	        FachadaConserto.criarCarro("AAA-1111", "12345678901", "João da Silva");
+	        FachadaConserto.criarCarro("BBB-2222", "98765432100", "Maria Oliveira");
+	        FachadaConserto.criarCarro("CCC-3333", "12312312312", "Carlos Souza");
+	        FachadaConserto.criarCarro("DDD-4444", "32132132132", "Ana Costa");
+	        FachadaConserto.criarCarro("EEE-5555", "55555555555", "Lucas Pereira");
+	        
+	        FachadaConserto.criarCarro("ZZZ-0000", "00000000000", "Carro para ser deletado");
+	    }catch (Exception e){
+	    	System.err.println(e.getMessage());
+	    }
 
         try {
         	System.out.println("\n----- Carro com Placa Errada: ");
@@ -99,7 +102,7 @@ public class Cadastrar {
 	        
 	        FachadaConserto.criarDefeito("Defeito para ser deletado", 1000.0);
 	        
-	        FachadaConserto.criarDefeito("Defeito para ser deletado", 1000.0); //Tentativa de criar Defeito repetido ta passando
+	        FachadaConserto.criarDefeito("Defeito para ser deletado", 1000.0); //Tentativa de criar Defeito repetido
     	}catch(Exception e){
         	System.err.println(e.getMessage());
     	}
@@ -114,21 +117,25 @@ public class Cadastrar {
 
 
     private static void cadastrarConsertos() throws Exception {
-	
-	        FachadaConserto.criarConserto("10/01/2023", "AAA-1111", Arrays.asList("Vazamento de Óleo", "Troca de Filtro de Ar"));
-	        FachadaConserto.criarConserto("12/02/2023", "BBB-2222", Arrays.asList("Substituição de Freios", "Problema na Embreagem"));
-	        FachadaConserto.criarConserto("15/03/2023", "CCC-3333", Arrays.asList("Troca de Pastilha de Freio", "Alinhamento de Direção"));
-	        FachadaConserto.criarConserto("20/04/2023", "DDD-4444", Arrays.asList("Balanceamento de Rodas", "Troca de Correia Dentada"));
-	        FachadaConserto.criarConserto("25/05/2023", "EEE-5555", Arrays.asList("Revisão de Suspensão", "Substituição de Amortecedor"));
-	        
-	        FachadaConserto.criarConserto("06/06/2024", "BBB-2222", Arrays.asList("Balanceamento de Rodas", "Revisão de Suspensão"));
-	        FachadaConserto.criarConserto("06/06/2024", "DDD-4444", Arrays.asList("Revisão de Suspensão", "Troca de Correia Dentada"));
-	        FachadaConserto.criarConserto("06/06/2024", "EEE-5555", Arrays.asList("Substituição de Amortecedor", "Troca de Filtro de Ar"));
-	        FachadaConserto.criarConserto("06/06/2024", "EEE-5555", Arrays.asList("Troca de Filtro de Ar", "Balanceamento de Rodas"));
-	        FachadaConserto.criarConserto("06/06/2024", "EEE-5555", Arrays.asList("Troca de Correia Dentada", "Revisão de Suspensão"));
-	        FachadaConserto.criarConserto("11/11/2024", "BBB-2222", Arrays.asList("Troca de Filtro de Ar"));
-	        
-	        FachadaConserto.criarConserto("01/01/2025", "ZZZ-0000", Arrays.asList("Balanceamento de Rodas", "Revisão de Suspensão"));
+		try {
+			FachadaConserto.criarConserto("10/01/2023", "AAA-1111", Arrays.asList("Vazamento de Óleo", "Troca de Filtro de Ar"));
+			FachadaConserto.criarConserto("12/02/2023", "BBB-2222", Arrays.asList("Substituição de Freios", "Problema na Embreagem"));
+    		FachadaConserto.criarConserto("15/03/2023", "CCC-3333", Arrays.asList("Troca de Pastilha de Freio", "Alinhamento de Direção"));
+    		FachadaConserto.criarConserto("20/04/2023", "DDD-4444", Arrays.asList("Balanceamento de Rodas", "Troca de Correia Dentada"));
+    		FachadaConserto.criarConserto("25/05/2023", "EEE-5555", Arrays.asList("Revisão de Suspensão", "Substituição de Amortecedor"));
+		        
+		    FachadaConserto.criarConserto("06/06/2024", "BBB-2222", Arrays.asList("Balanceamento de Rodas", "Revisão de Suspensão"));
+		    FachadaConserto.criarConserto("06/06/2024", "DDD-4444", Arrays.asList("Revisão de Suspensão", "Troca de Correia Dentada"));
+		    FachadaConserto.criarConserto("06/06/2024", "EEE-5555", Arrays.asList("Substituição de Amortecedor", "Troca de Filtro de Ar"));
+		    FachadaConserto.criarConserto("06/06/2024", "EEE-5555", Arrays.asList("Troca de Filtro de Ar", "Balanceamento de Rodas"));
+		    FachadaConserto.criarConserto("06/06/2024", "EEE-5555", Arrays.asList("Troca de Correia Dentada", "Revisão de Suspensão"));
+		    
+		    FachadaConserto.criarConserto("11/11/2024", "BBB-2222", Arrays.asList("Troca de Filtro de Ar"));
+
+		    FachadaConserto.criarConserto("01/01/2025", "ZZZ-0000", Arrays.asList("Balanceamento de Rodas", "Revisão de Suspensão"));
+		}catch (Exception e){
+	    	System.err.println(e.getMessage());
+	    }
 
 
 	        try {

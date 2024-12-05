@@ -27,11 +27,11 @@ public class Carro {
 
 	@Override
 	public String toString() {
-		String texto = "Id: " + id + ", Placa: " +  placa + " CPF: " + cpf + ", Proprietario: " + proprietario;
-		
-		//texto += "  IDConserto: ";
-		//for(Conserto c : consertos)
-		//	texto += c.getId() + ",";
+		String texto = "Id: " + id + ", Placa: " +  placa + ", CPF: " + cpf + ", Proprietario: " + proprietario;
+
+		texto += ",  ID Consertos: ";
+		for(Conserto c : consertos)
+			texto += c.getId() + ", ";
 
 		return texto;
 	}
@@ -94,5 +94,5 @@ public class Carro {
 	}
 
 
-} // Fim da class Carro
+} // Fim class Carro
 

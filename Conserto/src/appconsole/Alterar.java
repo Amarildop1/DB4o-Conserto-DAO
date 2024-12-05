@@ -16,56 +16,49 @@ public class Alterar {		//AS EXCEÇÕES AINDA ESTÃO GENÉRICAS. | Os prints estão g
 		try {
 			FachadaConserto.alterarNomeDefeito("nomeAntigo","novoNome");
 			System.out.println("Alterado nome de defeito!");
-		}
-		catch (Exception e) {
+		}catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
 		
 		try {
 			FachadaConserto.alterarCarro("BBB-2222", "01020304050", "Dono alterado");
 			System.out.println("Dono do veículo BBB-2222 alterado!");
-		}
-		catch (Exception e) {
+		}catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
 		
 		try {
 			FachadaConserto.alterarPlaca("EEE-5555", "ZZZ-1010");
 			System.out.println("Placa do veículo EEE-5555 alterado para ZZZ-1010!");
-		}
-		catch (Exception e) {
+		}catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
 		
 		try {
 			FachadaConserto.alterarConserto(9, "07/07/2024", "ZZZ-1010");
 			System.out.println("Data do conserto 9 era 06/06/2024 e foi alterada para 07/07/2024");
-		}
-		catch (Exception e) {
+		}catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
 		
 		try {
 			FachadaConserto.alterarData(9, "08/08/2024");
 			System.out.println("Data do conserto 9 era 07/07/2024 e foi alterada para 08/08/2024");
-		}
-		catch (Exception e) {
+		}catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
 		
 		try {
 			FachadaConserto.alterarNomeDefeito("Problema na Embreagem", "Problema na Elétrica");
-			System.out.println("Alterado de Problema na Embreagem para Problema na Elética!");
-		}
-		catch (Exception e) {
+			System.out.println("Alterado de \'Problema na Embreagem\' para \'Problema na Elética\'");
+		}catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
 		
 		try {
 			FachadaConserto.alterarPrecoDefeito("Problema na Elétrica", 700.00);
-			System.out.println("Preço de Problema na Elétrica atualizado para 700,00");
-		}
-		catch (Exception e) {
+			System.out.println("Preço de \'Problema na Elétrica\' atualizado para R$ 700,00");
+		}catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
 
