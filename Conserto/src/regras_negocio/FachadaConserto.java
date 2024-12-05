@@ -454,7 +454,13 @@ public class FachadaConserto {
 		
 		nome = nome.trim();
 		
-		Defeito d = new Defeito (nome, preco);
+		Defeito d = daodefeito.read(nome);
+		if (d != null) {
+			DAO.rollback();
+			throw new Exception("Problema ao tentar criar Defeito. Defeito \'" + nome + "\' já existe.");
+		}
+		
+		d = new Defeito(nome, preco);
 		daodefeito.create(d);
 		
 		DAO.commit();
@@ -496,7 +502,7 @@ public class FachadaConserto {
 		Defeito d = daodefeito.read(nome);
 		if (d == null) {
 			DAO.rollback();
-			throw new Exception("Problema ao tentar alterar nome do Defeito. Defeito inexistente:" + nome);
+			throw new Exception("Problema ao tentar alterar nome do Defeito. Defeito inexistente: " + nome);
 		}
 		
 		d.setNome(novoNome);
