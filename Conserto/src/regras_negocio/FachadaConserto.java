@@ -33,12 +33,14 @@ public class FachadaConserto {
 	}
 
 						// ********** TUDO SOBRE CARRO ABAIXO **********
-/**
- * Método para criar Carro
- * 
- * @param placa, cpf, proprietario
- * 
- * */
+	/**
+	 * Método para criar Carro
+	 * 
+	 * @param placa, cpf, proprietario
+	 * 
+	 * @return void
+	 * 
+	 * */
 	public static void criarCarro(String placa, String cpf, String proprietario) throws Exception {
 
 		DAO.begin();
@@ -68,15 +70,23 @@ public class FachadaConserto {
 		daocarro.create(c);
 		
 		DAO.commit();
-	}//Final método criarCarro();
+
+	} // Fim método criarCarro();
 
 
-
+	/**
+	 * Método para localizar Carro
+	 * 
+	 * @param placa
+	 * 
+	 * @return Carro
+	 * 
+	 * */
 	public static Carro localizarCarro(String placa) throws Exception {
 		placa = placa.trim();
 		Carro c = daocarro.read(placa);
 		if (c == null) {
-			throw new Exception("Carro com placa " + placa + " inexistente");
+			throw new Exception("Carro com placa " + placa + " inexistente.");
 		}
 		return c;
 	}
@@ -89,6 +99,8 @@ public class FachadaConserto {
 	 * 
 	 * @param placa, cpf, proprietario
 	 * 
+	 * @return void
+	 * 
 	 * */
 	public static void alterarCarro(String placa, String cpf, String proprietario) throws Exception {
 		DAO.begin();
@@ -100,12 +112,12 @@ public class FachadaConserto {
 		Carro c = daocarro.read(placa);
 		if (c == null) {
 			DAO.rollback();
-			throw new Exception("Alterar carro - carro com placa " + placa + " inexistente");
+			throw new Exception("Problema ao tentar alterar Carro. Carro com placa " + placa + " inexistente.");
 		}
 		
 		if (!cpf.matches("\\d{11}")) {
 			DAO.rollback();
-			throw new Exception("Alterar carro - o cpf deve ser numérico e ter exatamente 11 dígitos");
+			throw new Exception("Problema ao tentar alterar Carro. O CPF deve ser numérico e ter exatamente 11 dígitos.");
 		}
 		
 		c.setCpf(cpf);
@@ -113,7 +125,9 @@ public class FachadaConserto {
 		daocarro.update(c);
 		
 		DAO.commit();
-	}
+
+	} // Fim método alterarCarro()
+
 
 	//carro
 	/**
@@ -121,6 +135,8 @@ public class FachadaConserto {
 	 * Método alterarPlaca: Altera para placa nova após pesquisar pela placa atual.
 	 * 
 	 * @param placa, novaplaca
+	 * 
+	 * @return void
 	 * 
 	 * */
 	public static void alterarPlaca(String placa, String novaplaca) throws Exception {
@@ -132,7 +148,7 @@ public class FachadaConserto {
 		
 		if (c == null) {
 			DAO.rollback();
-			throw new Exception("Alterar placa - placa inexistente: " + placa);
+			throw new Exception("Problema ao tentar alterar Placa. Placa inexistente: " + placa);
 		}
 		
 		c.setPlaca(novaplaca);
@@ -142,6 +158,15 @@ public class FachadaConserto {
 	}
 
 
+	/**
+	 * 
+	 * Método excluirCarro(String placa)
+	 * 
+	 * @param placa
+	 *
+	 * @return void
+	 * 
+	 * */
 	public static void excluirCarro(String placa) throws Exception {
 		DAO.begin();
 		
@@ -150,7 +175,7 @@ public class FachadaConserto {
 		Carro c = daocarro.read(placa);
 		if (c == null) {
 			DAO.rollback();
-			throw new Exception("Excluir carro - carro com placa " + placa + " inexistente");
+			throw new Exception("Problema ao tentar excluir Carro. Carro com Placa " + placa + " inexistente");
 		}
 
 		// desligar o carro de seus consertos orfaos e apaga-los do banco
@@ -168,6 +193,15 @@ public class FachadaConserto {
 
 
 						// ********** TUDO SOBRE CONSERTO ABAIXO **********
+	/**
+	 * 
+	 * Método criarConserto(String data, String placa, List<String> defeitos)
+	 * 
+	 * @param data, placa, defeitos
+	 * 
+	 * @return void
+	 * 
+	 * */
 	public static void criarConserto(String data, String placa, List<String> defeitos) throws Exception {
 		DAO.begin();
 		
@@ -178,13 +212,13 @@ public class FachadaConserto {
 			LocalDate.parse(data, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 		} catch (DateTimeParseException e) {
 			DAO.rollback();
-			throw new Exception("Criar conserto - formato data inválido: " + data);
+			throw new Exception("Problema ao tentar criar Conserto. Formato de data inválido: " + data);
 		}
 		
 		Carro c = daocarro.read(placa);
 		if (c == null) {
 			DAO.rollback();
-			throw new Exception("Criar conserto - carro com placa" + placa + " inexistente");
+			throw new Exception("Problema ao tentar criar Conserto. Carro com placa " + placa + " inexistente");
 		}
 		
 	    Conserto conserto = new Conserto(data);
@@ -196,7 +230,7 @@ public class FachadaConserto {
 	        
 	        if (d == null) {
 	            DAO.rollback();
-	            throw new Exception("Criar conserto - defeito não encontrado: " + defeito);
+	            throw new Exception("Problema ao tentar criar Conserto. Defeito não encontrado: " + defeito);
 	        }
 	        conserto.adicionar(d);
 	    }
@@ -206,17 +240,18 @@ public class FachadaConserto {
 	    daoconserto.create(conserto);
 	    
 		DAO.commit();
-	}//Final do método criarConserto()
+
+	} // Fim método criarConserto()
 
 
-/**
- * Método Localizar Conserto
- * 
- * @param id do conserto para ser localizado
- * 
- * @return Um conserto do id
- * 
- * */
+	/**
+	 * Método localizarConserto(int id): Localiza o conserto pelo id informado.
+	 * 
+	 * @param id
+	 * 
+	 * @return Conserto
+	 * 
+	 * */
 	public static Conserto localizarConserto(int id) throws Exception {
 		Conserto c = daoconserto.read(id);
 		if (c == null) {
@@ -228,6 +263,14 @@ public class FachadaConserto {
 
 
 	//altera a data do conserto e a placa do carro correspondente
+	/**
+	 * Método alterarConserto(int id, String data, String placa): altera o conserto localizado pelo id informado.
+	 * 
+	 * @param id, data, placa
+	 * 
+	 * @return void
+	 * 
+	 * */
 	public static void alterarConserto(int id, String data, String placa) throws Exception {
 		DAO.begin();
 		
@@ -237,7 +280,7 @@ public class FachadaConserto {
 		Conserto conserto = daoconserto.read(id);
 		if (conserto == null) {
 			DAO.rollback();
-			throw new Exception("Alterar conserto - conserto inexistente: " + id);
+			throw new Exception("Problema ao tentar alterar Conserto. Conserto inexistente: " + id);
 		}
 
 		if (data != null) {
@@ -246,14 +289,14 @@ public class FachadaConserto {
 				conserto.setData(data);
 			} catch (DateTimeParseException e) {
 				DAO.rollback();
-				throw new Exception("Alterar conserto - formato data invalido: " + data);
+				throw new Exception("Problema ao tentar alterar Conserto. Formato de Data inválido: " + data);
 			}
 		}
 		
 		Carro c = daocarro.read(placa);
 		if (c == null) {
 			DAO.rollback();
-			throw new Exception("Alterar conserto - carro com placa" + placa + " inexistente");
+			throw new Exception("Problema ao tentar alterar Conserto. Carro com placa " + placa + " inexistente");
 		}
 		
 		conserto.setCarro(c);
@@ -261,10 +304,19 @@ public class FachadaConserto {
 		daoconserto.update(conserto);
 		
 		DAO.commit();
-	}//Final do método alterarConserto()
+
+	} // Fim método alterarConserto()
 
 
 	//conserto
+	/**
+	 * Método alterarData(int id, String data): altera a data do conserto localizado pelo id informado.
+	 * 
+	 * @param id, data
+	 * 
+	 * @return void
+	 * 
+	 * */
 	public static void alterarData(int id, String data) throws Exception {
 		DAO.begin();
 		
@@ -273,7 +325,7 @@ public class FachadaConserto {
 		Conserto conserto = daoconserto.read(id);
 		if (conserto == null) {
 			DAO.rollback();
-			throw new Exception("Alterar data - conserto inexistente: " + id);
+			throw new Exception("Problema ao tentar alterar a Data. Conserto inexistente: " + id);
 		}
 
 		if (data != null) {
@@ -282,7 +334,7 @@ public class FachadaConserto {
 				conserto.setData(data);
 			} catch (DateTimeParseException e) {
 				DAO.rollback();
-				throw new Exception("Alterar data - formato data invalido: " + data);
+				throw new Exception("Problema ao tentar alterar a Data. Formato de Data inválido: " + data);
 			}
 		}
 		daoconserto.update(conserto);
@@ -297,7 +349,7 @@ public class FachadaConserto {
 		Conserto conserto = daoconserto.read(id);
 		if (conserto == null) {
 			DAO.rollback();
-			throw new Exception("Excluir conserto - conserto com id " + id + " inexistente");
+			throw new Exception("Problema ao tentar excluir Conserto. Conserto com id " + id + " inexistente");
 		}
 
 		Carro c = conserto.getCarro();
@@ -313,13 +365,21 @@ public class FachadaConserto {
 	
 	
 	//conserto
+	/**
+	 * Método adicionarDefeitos(int id, List<String> defeitos): Adiciona defeitos ao conserto localizado pelo id informado.
+	 * 
+	 * @param id, defeitos
+	 * 
+	 * @return void
+	 * 
+	 * */
 	public static void adicionarDefeitos(int id, List<String> defeitos) throws Exception {
 		DAO.begin();
 		
 		Conserto conserto = daoconserto.read(id);
 		if (conserto == null) {
 			DAO.rollback();
-			throw new Exception("Adicionar defeito - conserto com id " + id + " inexistente");
+			throw new Exception("Problema ao tentar adicionar Defeito. Conserto com id " + id + " inexistente");
 		}
 		
 		for (String defeito : defeitos) {
@@ -328,7 +388,7 @@ public class FachadaConserto {
 	        
 	        if (d == null) {
 	            DAO.rollback();
-	            throw new Exception("Adicionar defeito - defeito não encontrado: " + defeito);
+	            throw new Exception("Problema ao tentar adicionar Defeito. Defeito não encontrado: " + defeito);
 	        }
 	        conserto.adicionar(d);
 	    }
@@ -336,17 +396,26 @@ public class FachadaConserto {
 		conserto.calcularPrecoFinal();
 		daoconserto.update(conserto);
 		DAO.commit();
-	}
+
+	} // Fim método adicionarDefeitos()
 
 	
 	//conserto
+	/**
+	 * Método removerDefeito(int id, List<String> defeitos): remove defeitos do conserto localizado pelo id informado.
+	 * 
+	 * @param id, defeitos
+	 * 
+	 * @return void
+	 * 
+	 * */
 	public static void removerDefeito(int id, List<String> defeitos) throws Exception {
 		DAO.begin();
 		
 		Conserto conserto = daoconserto.read(id);
 		if (conserto == null) {
 			DAO.rollback();
-			throw new Exception("Remover defeito - conserto com id " + id + " inexistente");
+			throw new Exception("Problema ao tentar remover Defeito. Conserto com id " + id + " inexistente");
 		}
 		
 		for (String defeito : defeitos) {
@@ -355,7 +424,7 @@ public class FachadaConserto {
 	        
 	        if (d == null) {
 	            DAO.rollback();
-	            throw new Exception("Remover defeito - defeito não encontrado: " + defeito);
+	            throw new Exception("Problema ao tentar remover Defeito. Defeito não encontrado: " + defeito);
 	        }
 	        conserto.remover(d);
 	    }
@@ -364,13 +433,22 @@ public class FachadaConserto {
 		daoconserto.update(conserto);
 		
 		DAO.commit();
-	}
+
+	} // Fim método removerDefeito()
 						// ********** TUDO SOBRE CONSERTO ACIMA **********
 	
 
 
 	
 						// ********** TUDO SOBRE DEFEITO ABAIXO **********
+	/**
+	 * Método criarDefeito(String nome, double preco)
+	 * 
+	 * @param nome, preco
+	 * 
+	 * @return void
+	 * 
+	 * */
 	public static void criarDefeito(String nome, double preco) throws Exception {
 		DAO.begin();
 		
@@ -383,12 +461,14 @@ public class FachadaConserto {
 	}
 
 
-/**
- * Localizar Defeito
- * 
- * @param String nome do defeito para ser localizado
- * 
- * */
+	/**
+	 * Método localizarDefeito(String nome): Localiza um defeito pelo nome exato.
+	 * 
+	 * @param nome
+	 * 
+	 * @return Defeito
+	 * 
+	 * */
 	public static Defeito localizarDefeito(String nome) throws Exception {
 		nome = nome.trim();
 		Defeito d = daodefeito.read(nome);
@@ -399,6 +479,14 @@ public class FachadaConserto {
 	}
 
 
+	/**
+	 * Método alterarNomeDefeito(String nome, String novoNome): Busca o Defeito pelo nome e altera para o novoNome.
+	 * 
+	 * @param nome, novoNome
+	 * 
+	 * @return void
+	 * 
+	 * */
 	public static void alterarNomeDefeito(String nome, String novoNome) throws Exception {
 		DAO.begin();
 		
@@ -408,7 +496,7 @@ public class FachadaConserto {
 		Defeito d = daodefeito.read(nome);
 		if (d == null) {
 			DAO.rollback();
-			throw new Exception("Alterar nome defeito - defeito inexistente:" + nome);
+			throw new Exception("Problema ao tentar alterar nome do Defeito. Defeito inexistente:" + nome);
 		}
 		
 		d.setNome(novoNome);
@@ -418,6 +506,14 @@ public class FachadaConserto {
 	}
 
 
+	/**
+	 * Método alterarPrecoDefeito(String nome, double preco): Localiza um defeito pelo nome e altera seu preço.
+	 * 
+	 * @param nome, preco
+	 * 
+	 * @return void
+	 * 
+	 * */
 	public static void alterarPrecoDefeito(String nome, double preco) throws Exception {
 		DAO.begin();
 		
@@ -426,7 +522,7 @@ public class FachadaConserto {
 		Defeito d = daodefeito.read(nome);
 		if (d == null) {
 			DAO.rollback();
-			throw new Exception("Alterar preÃ§o defeito - defeito inexistente:" + nome);
+			throw new Exception("Problema ao tentar alterar Preço do Defeito. Defeito inexistente:" + nome);
 		}
 		
 		d.setPreco(preco);
@@ -436,6 +532,14 @@ public class FachadaConserto {
 	}
 
 
+	/**
+	 * Método excluirDefeito(String nome): Localiza um defeito pelo nome e o exclui.
+	 * 
+	 * @param nome
+	 * 
+	 * @return void
+	 * 
+	 * */
 	public static void excluirDefeito(String nome) throws Exception {
 		DAO.begin();
 		
@@ -444,7 +548,7 @@ public class FachadaConserto {
 		Defeito d = daodefeito.read(nome);
 		if (d == null) {
 			DAO.rollback();
-			throw new Exception("Excluir defeito - defeito inexistente: " + nome);
+			throw new Exception("Problema ao tentar excluir Defeito. Defeito inexistente: " + nome);
 		}
 
 		//remove a associação do defeito aos consertos
@@ -510,18 +614,44 @@ public class FachadaConserto {
 		return result;
 	}
 
+	/**
+	 * Método consultarDataConserto(String data): Para exibir todos os Consertos da data informada.
+	 * 
+	 * @param data
+	 * 
+	 * @return List<Conserto>
+	 * 
+	 * */
 	public static List<Conserto> consultarDataConserto(String data) {
 		List<Conserto> result;
 		result = daoconserto.readByData(data);
 		return result;
 	}
-	
+
+
+	/**
+	 * Método consultarCarrosComDefeitoX(String caracteres): Para exibir os Carros com o defeito informado.
+	 * 
+	 * @param caracteres
+	 * 
+	 * @return List<Carro>
+	 * 
+	 * */
 	public static List<Carro> consultarCarrosComDefeitoX(String caracteres) {
 		List<Carro> result;
 		result = daocarro.readByDefeito(caracteres);
 		return result;
 	}
 
+
+	/**
+	 * Método consultarCarrosComMaisQueNConserto(int n): Para exibir Carros com mais que "n" Consertos.
+	 * 
+	 * @param n
+	 * 
+	 * @return List<Carro>
+	 * 
+	 * */
 	public static List<Carro> consultarCarrosComMaisQueNConserto(int n) {
 		List<Carro> result;
 		DAO.begin();
@@ -530,5 +660,6 @@ public class FachadaConserto {
 		return result;
 	}
 
-}//Final da class FachadaConserto
+
+} // Fim class FachadaConserto
 
