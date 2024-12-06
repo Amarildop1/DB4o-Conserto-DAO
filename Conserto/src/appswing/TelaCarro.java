@@ -107,7 +107,7 @@ public class TelaCarro {
 						String cpf = carro.getCpf() + "";
 						textField_Placa.setText(placa);
 						textField_Proprietario.setText(proprietario);
-						textField_Defeitos.setText(String.join(",", carro.getConsertos().toString()));
+						//textField_Defeitos.setText(String.join(",", carro.getConsertos().toString()));
 						textField_CPF.setText(cpf);
 						label.setText("");
 					}
@@ -374,14 +374,15 @@ public class TelaCarro {
 					texto2 = "Sem Consertos";
 
 				model.addRow( // Se adicionar carro.getId() na linha abaixo, dá erro ao clicar na linha da tabela, class java.lang.Integer cannot be cst to class !
-						new Object[] { carro.getPlaca(), carro.getPlaca(), carro.getCpf(), texto1, texto2 });
+						new Object[] {carro.getPlaca(), carro.getPlaca(), carro.getCpf(), texto1, texto2 });
 
 			}
 			lblMensagemExibida.setText("Resultados: " + lista.size() + " Carros   -  selecione uma linha para editar");
 
 			// redimensionar a coluna 3 e 4
 			table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // desabilita
-			table.getColumnModel().getColumn(3).setMinWidth(200); // Proprietário
+			table.getColumnModel().getColumn(0).setMaxWidth(40); // coluna id
+			table.getColumnModel().getColumn(3).setMinWidth(100); // Proprietário
 			table.getColumnModel().getColumn(4).setMinWidth(200); // Consertos
 			table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS); // desabilita
 

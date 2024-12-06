@@ -350,13 +350,13 @@ public class TelaConserto {
 			model.addColumn("Id");
 			model.addColumn("Carro");
 			model.addColumn("Data");
-			model.addColumn("Consertos");
+			model.addColumn("Preço Final");
 			model.addColumn("Defeitos");
 
 			// criar as linhas da tabela
 			String texto1, texto2;
 			for (Conserto conserto : lista) {
-				texto1 = String.join(",", conserto.toString()); // concatena strings
+				texto1 = String.join(",", String.valueOf(conserto.getPrecoFinal())); // concatena strings
 				if (conserto.getDefeitos().size() > 0) {
 					texto2 = "";
 					for (Defeito defeito : conserto.getDefeitos())
@@ -364,7 +364,7 @@ public class TelaConserto {
 				} else
 					texto2 = "Sem Defeitos";
 				//adicionar linha no table
-				model.addRow(new Object[] { conserto.getId(), conserto.getCarro(), conserto.getData(), texto1, texto2 });
+				model.addRow(new Object[] { conserto.getId(), conserto.getCarro().getPlaca(), conserto.getData(), texto1, texto2 });
 
 			}
 			lblMensagemExibida.setText("Resultados: " + lista.size() + " Consertos   -  Selecione uma linha para editar");
@@ -372,8 +372,8 @@ public class TelaConserto {
 			// redimensionar a coluna 0,3 e 4
 			table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // desabilita
 			table.getColumnModel().getColumn(0).setMaxWidth(40); // coluna id
-			table.getColumnModel().getColumn(3).setMinWidth(200); // era coluna dos apelidos
-			table.getColumnModel().getColumn(4).setMinWidth(200); // era coluna dos telefones
+			table.getColumnModel().getColumn(3).setMinWidth(100); // Preço
+			table.getColumnModel().getColumn(4).setMinWidth(300); // Defeitos
 			table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS); // desabilita
 
 		} catch (Exception erro) {
