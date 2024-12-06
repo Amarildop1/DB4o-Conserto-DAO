@@ -342,7 +342,14 @@ public class FachadaConserto {
 	}
 
 
-	
+	/**
+	 * Método excluirConserto(int id)
+	 * 
+	 * @param id
+	 * 
+	 * @return void
+	 * 
+	 * */
 	public static void excluirConserto(int id) throws Exception {
 		DAO.begin();
 		

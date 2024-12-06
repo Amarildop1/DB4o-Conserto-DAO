@@ -83,7 +83,7 @@ public class TelaCarro {
 			}
 		});
 		frame.setTitle("Carros");
-		frame.setBounds(100, 100, 744, 428);
+		frame.setBounds(300, 120, 744, 428);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setResizable(false);
@@ -243,7 +243,7 @@ public class TelaCarro {
 						label.setText("Erro: O CPF não pode ser vazio.");
 						return;
 					}
-					// Formatação dos dados
+					// Formatação
 					String placa = textField_Placa.getText().trim();
 					String proprietario = textField_Proprietario.getText().trim();
 					String cpf = textField_CPF.getText().trim();
@@ -290,7 +290,7 @@ public class TelaCarro {
 					String proprietario = textField_Proprietario.getText().trim();
 					String cpf = textField_CPF.getText().trim();
 
-					// Chamada ao método da Fachada para alterar o carro
+					// Método da Fachada
 					FachadaConserto.alterarCarro(placa, cpf, proprietario);
 
 					label.setText("Carro atualizado com sucesso!");
@@ -381,8 +381,8 @@ public class TelaCarro {
 
 			// redimensionar a coluna 3 e 4
 			table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // desabilita
-			table.getColumnModel().getColumn(3).setMinWidth(200); // era coluna dos apelidos
-			table.getColumnModel().getColumn(4).setMinWidth(200); // era coluna dos telefones
+			table.getColumnModel().getColumn(3).setMinWidth(200); // Proprietário
+			table.getColumnModel().getColumn(4).setMinWidth(200); // Consertos
 			table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS); // desabilita
 
 		} catch (Exception erro) {
